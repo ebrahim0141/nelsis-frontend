@@ -29,25 +29,32 @@ export default{
     },
     
     methods:{
+        validate() {
+          this.errors = {};
+            if (!this.product.name) this.errors.name = 'Name is required.';
+            if (!this.product.description) this.errors.description = 'Description is required.';
+            if (!this.product.price) this.errors.price = 'Price is required.';
+            return Object.keys(this.errors).length === 0;
+        },
         async add(){
+            if (this.validate()) {
+                const string_token = window.localStorage.getItem("user-info");
+                var token = string_token.slice(1,-1);
 
-            const string_token = window.localStorage.getItem("user-info");
-            var token = string_token.slice(1,-1);
-
-            if (token != null) {
-              let result = await axios
-                .post(`${"http://localhost:8000/api/auth"}/${"store-product"}`, this.product, {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                  },
-                })
-                console.log(result)
-                if (result.status==200) {
-                    this.$router.push({name:"Home"});
+                if (token != null) {
+                let result = await axios
+                    .post(`${"http://localhost:8000/api/auth"}/${"store-product"}`, this.product, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    })
+                    console.log(result)
+                    if (result.status==200) {
+                        this.$router.push({name:"Home"});
+                    }
                 }
             }
-            
         }
     },
     mounted(){

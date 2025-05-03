@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <h1>Update page</h1>
+    <h1>Update product</h1>
     <form action="" class="add">
         <input v-model="product.name" type="text" name="name" placeholder="Product Name">
         <input v-model="product.description" type="text" name="description" placeholder="Product Description">

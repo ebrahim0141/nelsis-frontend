@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <h1>Home page</h1>
+    <h1>All products</h1>
     <table border="1" class="center">
         <tr class="text">
             <td>Name</td>
